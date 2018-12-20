@@ -15,4 +15,8 @@ let min = 1,
     guessesLeft = 3;
 
 
-// Ui
+// UI Elements
+const game = document.getElementById('game'),
+    minNum = document.querySelector('.min-num'),
+    maxNum = document.querySelector('.max-num'),
+    guessBtn = document.querySelector('.'),
