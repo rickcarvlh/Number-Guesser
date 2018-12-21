@@ -16,7 +16,44 @@ let min = 1,
 
 
 // UI Elements
-const game = document.getElementById('game'),
+const game = document.querySelector('#game'),
     minNum = document.querySelector('.min-num'),
     maxNum = document.querySelector('.max-num'),
-    guessBtn = document.querySelector('.'),
+    guessBtn = document.querySelector('#guess-btn'),
+    guessInput = document.querySelector('#guess-input'),
+    message = document.querySelector('.message');
+
+// Assign UI min and max - so it becomes dynamic on the html
+minNum.textContent = min;
+maxNum.textContent = max;
+
+// Listen for guess - submit button
+guessBtn.addEventListener('click', function () {
+    // this starts as string needs to be converted
+    let guess = parseInt(guessInput.value);
+
+    // Validate input
+    if (isNaN(guess) || guess < min || guess > max) {
+        setMessage(`Please enter a number between ${min} and ${max}`,
+            'red');
+    }
+
+    // Check if won
+    if (guess === winningNum) {
+        // Disable input - disabled is a reserved keyword
+        guessInput.disabled = true;
+        // Change border color
+        guessInput.style.borderColor = 'green';
+        // Set message
+        setMessage(`${winningNum} is correct, YOU WIN!`, 'green');
+    } else {
+
+    }
+
+});
+
+// Set message
+function setMessage(msg, color) {
+    message.style.color = 'red';
+    message.textContent = msg
+}
