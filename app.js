@@ -40,20 +40,68 @@ guessBtn.addEventListener('click', function () {
 
     // Check if won
     if (guess === winningNum) {
-        // Disable input - disabled is a reserved keyword
-        guessInput.disabled = true;
-        // Change border color
-        guessInput.style.borderColor = 'green';
-        // Set message
-        setMessage(`${winningNum} is correct, YOU WIN!`, 'green');
+        // Game over Won
+
+        // // Disable input - disabled is a reserved keyword
+        // guessInput.disabled = true;
+        // // Change border color
+        // guessInput.style.borderColor = 'green';
+        // // Set message
+        // setMessage(`${winningNum} is correct, YOU WIN!`, 'green');
+        gameOver(true, `${winningNum} is correct, YOU WIN!`);
+
     } else {
+        // Wrong Number = guessesLeft = guessesLeft -1;
+        guessesLeft -= -1;
+
+        if (guessesLeft === 0) {
+            // Game over lost
+
+            // // Disable input - disabled is a reserved keyword
+            // guessInput.disabled = true;
+            // // Change border color
+            // guessInput.style.borderColor = 'red';
+            // // Set message
+            // setMessage(`Game over, you lost. The correct number was ${winningNum}`, 'red');
+            gameOver(false, `Game over, you lost. The correct number was ${winningNum}`);
+
+
+        } else {
+            // Game continues - answer wrong
+
+            // Change border color
+            guessInput.style.borderColor = 'red';
+
+            // Clear input
+            guessInput.value = '';
+
+            // Tell user its the wrong number
+            setMessage(`${guess} is not correct, ${guessesLeft} guessLeft`, 'red');
+        }
 
     }
 
 });
 
+// Game Over
+function gameOver(won, msg) {
+
+    let color;
+    won = true ? color = 'green' : color = 'red';
+
+    // Disable input - disabled is a reserved keyword
+    guessInput.disabled = true;
+    // Change border color
+    guessInput.style.borderColor = 'color';
+    //  Set text color
+    message.style.color = 'color';
+    // Set message
+    setMessage(msg);
+
+}
+
 // Set message
 function setMessage(msg, color) {
-    message.style.color = 'red';
+    message.style.color = color;
     message.textContent = msg
 }
